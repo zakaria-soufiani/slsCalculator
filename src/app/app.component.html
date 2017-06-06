@@ -1,25 +1,32 @@
 <app-navbar></app-navbar>
 <div class="main">
   <div class="container">
-    <h2>Calculator</h2>
-    <form class="example-form">
+    <h2>SLS Calculator</h2>
+    <form class="example-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="form-group">
         <md-input-container class="example-full-width">
-          <input mdInput placeholder="Execution time (ms)">
+          <input mdInput placeholder="Execution time (ms)" name="execLength"
+                  [(ngModel)]="new_execution_length" #execLength="ngModel" required>
         </md-input-container>
       </div>
       <div class="form-group">
         <md-input-container class="example-full-width">
-          <input mdInput placeholder="Lambda size">
+          <input mdInput placeholder="Lambda size" name="memAlloc"
+                 [(ngModel)]="new_memory_allocation" #memAlloc="ngModel" required>
         </md-input-container>
       </div>
       <div class="form-group">
         <md-input-container class="example-full-width">
-          <input mdInput placeholder="Request number">
+          <input mdInput placeholder="Request number" name="execTime"
+                 [(ngModel)]="new_execution_times" #execTime="ngModel" required>
         </md-input-container>
       </div>
       <div class="form-group">
-        <button md-raised-button>Calculate</button>
+        <md-checkbox name="freeCheck"
+                     [(ngModel)]="new_free_check" #freeCheck="ngModel" required>Include free tier</md-checkbox>
+      </div>
+      <div class="form-group">
+        <button type="submit" md-raised-button (click)="calculate(new_memory_allocation, new_execution_times, new_execution_length, new_free_check)">Calculate</button>
       </div>
     </form>
   </div>
