@@ -27,13 +27,26 @@ export class AppComponent {
   }
 
   calculate(memory_allocation, execution_times, execution_length, free_tier_check) {
+
+    let freeCheck: string;
+
+
+    if(free_tier_check){
+      freeCheck = 'true';
+    } else {
+      freeCheck = 'false';
+    }
+
     let mem_alloc = {memory_allocation: memory_allocation};
     let exec_times = {execution_times: execution_times};
     let exec_length = {execution_length: execution_length};
-    let check = {free_tier_check: free_tier_check};
+    let check = {free_tier_check: freeCheck};
 
-    this.CalculatorService.calculate(mem_alloc, exec_times, exec_length, check).subscribe(data => this.results = data);
-    console.log(this.results);
+    this.CalculatorService.calculate(mem_alloc, exec_times, exec_length, check).subscribe(data => {
+      this.results = data;
+
+      console.log(this.results);
+    });
   }
 }
 

@@ -12,10 +12,12 @@ export class CalculatorService {
   constructor(private http: Http) { }
 
   calculate( memory_allocation, execution_times, execution_length, free_tier_check) {
+
     let headers = new Headers({'Content-Type' : 'application/json'});
     let options = new RequestOptions({ headers: headers});
     let INFO =  Object.assign(memory_allocation, execution_length, execution_times, free_tier_check);
     let body = JSON.stringify(INFO);
+    console.log(body);
     return this.http.post(this.API_URL, body, options).map((res: Response) => res.json());
   }
 
